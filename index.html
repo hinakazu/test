@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<meta charset="utf-8" />
+		<title>sweet memory</title>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, voice__user-scalable=no"
+		/>
+		<meta name="format-detection" content="telephone=no" />
+		<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+		<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/object-fit-images/3.2.4/ofi.js"></script>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<style>
+			/*---------------------
+初期化
+---------------------*/
+			* {
+				margin: 0;
+				padding: 0;
+				word-break: normal;
+				box-sizing: border-box;
+			}
+
+			html {
+				font-size: 62.5%;
+			}
+
+			body {
+				width: 100%;
+				margin: 0;
+				padding: 0;
+				text-align: center;
+				font-family: "Mplus 1p", "ArialMT", "Hiragino Kaku Gothic ProN",
+					"ヒラギノ角ゴ ProN W3", メイリオ, sans-serif;
+				font-weight: normal;
+				font-size: 1.6rem;
+				color: #fff;
+				background: #000;
+				-webkit-text-size-adjust: none;
+				line-height: 1.6;
+				overflow-x: hidden !important;
+			}
+
+			@media screen and (min-width: 769px) {
+				body {
+					font-size: 2rem;
+				}
+			}
+
+			dl,
+			ul,
+			ol {
+				list-style-type: none;
+			}
+
+			article,
+			aside,
+			canvas,
+			details,
+			figcaption,
+			figure,
+			footer,
+			header,
+			hgroup,
+			menu,
+			nav,
+			section,
+			summary {
+				display: block;
+			}
+
+			table {
+				width: 100%;
+				table-layout: fixed;
+				border-collapse: collapse;
+				border-spacing: 0;
+				border: 0;
+			}
+
+			table th,
+			table td {
+				text-align: left;
+				font-weight: normal;
+				font-size: 12px;
+				padding: 10px;
+			}
+
+			img {
+				width: 100%;
+				border: 0;
+				vertical-align: bottom;
+			}
+
+			/*link基本設定*/
+			a {
+				text-decoration: none;
+			}
+
+			a:focus,
+			a:active,
+			input:focus {
+				outline: none;
+			}
+
+			a,
+			img {
+				-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+			}
+
+			.container {
+				width: 100%;
+			}
+
+			@media screen and (min-width: 769px) {
+				.container {
+					width: 1000px;
+					margin: 0 auto;
+				}
+			}
+
+			#video-area {
+				width: 1000px;
+				margin: 0 auto;
+				position: fixed;
+				z-index: -1;
+				/*最背面に設定*/
+				top: 0;
+				right: 0;
+				left: 0;
+				bottom: 0;
+				overflow: hidden;
+			}
+
+			#video {
+				position: absolute;
+				top: 0;
+				left: 50%;
+				transform: translateX(-50%);
+				-webkit-transform: translateX(-50%);
+				-ms-transform: translateX(-50%);
+				max-height: 100%;
+				min-height: 100vh;
+				min-width: 100%;
+				object-fit: cover;
+				opacity: 1;
+			}
+
+			@media screen and (max-width: 768px) {
+				#video {
+					height: auto;
+					position: inherit;
+					max-width: inherit;
+					min-width: 100%;
+					max-height: 100%;
+				}
+			}
+
+			/* .fv {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-top: 154%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+      } */
+
+			/* .fv_text {
+        width: 90%;
+        position: absolute;
+        top: 15%;
+        left: 5%;
+      } */
+
+			/* .btn01 {
+        width: 90%;
+        position: absolute;
+        bottom: 15%;
+        left: 50%;
+        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+      } */
+
+			.yureru-j {
+				animation: yureru-j 2s infinite;
+			}
+
+			@keyframes yureru-j {
+				0% {
+					transform: translate(0px, 2px);
+				}
+
+				5% {
+					transform: translate(0px, -2px);
+				}
+
+				10% {
+					transform: translate(0px, 2px);
+				}
+
+				15% {
+					transform: translate(0px, -2px);
+				}
+
+				20% {
+					transform: translate(0px, 2px);
+				}
+
+				25% {
+					transform: translate(0px, -2px);
+				}
+
+				30% {
+					transform: translate(0px, 0px);
+				}
+			}
+
+			@keyframes anime {
+				0% {
+					transform: scale(0.9);
+					opacity: 1;
+				}
+
+				90% {
+					opacity: 0.1;
+				}
+
+				to {
+					transform: scale(1.2, 1.5);
+					opacity: 0;
+				}
+			}
+
+			.btn02 {
+				width: 90%;
+				margin: 0 auto 20px auto;
+			}
+
+			.step {
+				background: url();
+				background-size: cover;
+			}
+
+			/*---------------------
+photo
+---------------------*/
+
+			.photo__block {
+				box-sizing: border-box;
+				overflow: hidden;
+				width: 100%;
+				/* 画面又は親要素に対するサイズ - 変更可 */
+				margin: 0 auto;
+				/* Box外の余白 - 変更可 */
+			}
+
+			.photo__slide {
+				position: relative;
+				width: 100%;
+				overflow: hidden;
+				margin-bottom: 18px;
+			}
+
+			.photo__slide,
+			.photo__slide ul {
+				height: 360px;
+				/* スライダーの高さ - 変更注意 */
+			}
+
+			.photo__slide ul {
+				position: absolute;
+				left: 0;
+				top: 0;
+				display: flex;
+				justify-content: space-between;
+				list-style: none;
+				max-width: 10000%;
+				min-width: 100%;
+				width: calc(260px * 2.5 * 3);
+				/* 画像の横幅×枚数 - 変更注意・変更可・変更注意 */
+				animation: 40s linear infinite;
+				/* アニメーション設定 - 変更可 */
+			}
+
+			.photo__slide li {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-wrap: wrap;
+				color: #fff;
+				width: calc(100% / 3);
+				/* li の幅を均等にする - 削除可・変更注意 */
+			}
+
+			.photo__slide img {
+				width: 260px;
+				height: 260px;
+				object-fit: cover;
+				object-position: 50% 0;
+				border-radius: 50%;
+			}
+
+			.text {
+				display: block;
+				background: #4c3b92;
+				border-radius: 50px;
+				width: 75%;
+			}
+
+			/* アニメーション個別設定 ++++++++++ */
+			.photo__slide ul.loop1 {
+				animation-name: loop1;
+			}
+
+			.photo__slide ul.loop2 {
+				animation-name: loop2;
+			}
+
+			@keyframes loop1 {
+				0% {
+					transform: translateX(0);
+				}
+
+				49.99999% {
+					transform: translateX(-100%);
+				}
+
+				50% {
+					transform: translateX(100%);
+				}
+			}
+
+			@keyframes loop2 {
+				0% {
+					transform: translateX(100%);
+				}
+
+				100% {
+					transform: translateX(-100%);
+				}
+			}
+
+			@media screen and (max-width: 768px) {
+				.photo__slide {
+					position: relative;
+					width: 100%;
+					overflow: hidden;
+					margin-bottom: 10px;
+				}
+
+				.photo__slide:last-child {
+					margin-bottom: 0;
+				}
+
+				.photo__slide,
+				.photo__slide ul {
+					height: 180px;
+					/* スライダーの高さ - 変更注意 */
+				}
+
+				.photo__slide ul {
+					position: absolute;
+					left: 0;
+					top: 0;
+					display: flex;
+					justify-content: space-between;
+					list-style: none;
+					max-width: 300%;
+					min-width: 100%;
+					width: calc(110px * 2.5 * 3);
+					/* 画像の横幅×枚数 - 変更注意・変更可・変更注意 */
+					animation: 40s linear infinite;
+					/* アニメーション設定 - 変更可 */
+				}
+
+				.photo__slide img {
+					width: 110px;
+					height: 110px;
+					object-position: 50% 0;
+				}
+			}
+
+			.footer {
+				background: #212121;
+				text-align: left;
+			}
+
+			.footer li a {
+				display: block;
+				padding: 20px;
+				color: #fff;
+				cursor: pointer;
+			}
+
+			.footer li {
+				border-bottom: 1px solid #fff;
+			}
+
+			.footer small {
+				padding: 20px;
+				text-align: center;
+				display: block;
+			}
+
+			/* -------- パソコン -------- */
+			.header {
+				width: 100%;
+				height: 100px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background: linear-gradient(#4c3b92, #ed3b4b);
+			}
+
+			.header__text {
+				font-size: 40px;
+				font-weight: 600;
+			}
+
+			.fv {
+				position: relative;
+			}
+
+			.lineBlock {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.bubble {
+				position: relative;
+				top: 10px;
+				left: 10px;
+				margin: 1.5em 15px 1.5em 0;
+				padding: 0 5px;
+				width: 140px;
+				height: 140px;
+				line-height: 30px;
+				text-align: center;
+				font-size: 20px;
+				font-weight: bold;
+				background: yellow;
+				border-radius: 50%;
+				box-sizing: border-box;
+			}
+
+			.bubble::before {
+				content: "";
+				position: absolute;
+				bottom: -4px;
+				right: -4px;
+				margin-top: -15px;
+				border: 15px solid transparent;
+				border-left: 15px solid yellow;
+				z-index: 0;
+				-webkit-transform: rotate(45deg);
+				transform: rotate(45deg);
+			}
+
+			.bubble__text {
+				position: relative;
+				top: 25px;
+			}
+
+			.line__text {
+				font-size: 40px;
+				font-weight: 600;
+				margin-left: 20px;
+				-webkit-text-stroke: 2px green;
+			}
+
+			.img2 {
+				position: absolute;
+				top: -100px;
+				right: 20px;
+				width: 300px;
+				height: 300px;
+				border-radius: 50%;
+				object-fit: cover;
+				z-index: -1;
+			}
+
+			.hero__text {
+				font-size: 80px;
+				font-weight: 900;
+				background: linear-gradient(#ff00ef 1%, #ffffff);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				-webkit-text-stroke: 1.5px black;
+			}
+
+			.hero__text1 {
+				font-size: 80px;
+				font-weight: 900;
+				color: rgb(251, 255, 0);
+				/* -webkit-text-stroke: 1px white; */
+			}
+
+			.balloon {
+				position: relative;
+				display: inline-block;
+				margin: 1.5em 0;
+				padding: 30px 10px;
+				color: white;
+				font-size: 32px;
+				font-weight: 600;
+				letter-spacing: 0.16em;
+				background: red;
+				border-radius: 60px;
+			}
+
+			.balloon:before {
+				content: "";
+				position: absolute;
+				top: 100%;
+				left: 50%;
+				margin-left: -15px;
+				border: 15px solid transparent;
+				border-top: 15px solid red;
+			}
+
+			.line__btn {
+				display: block;
+				line-height: 180px;
+				width: 80%;
+				height: 180px;
+				background: linear-gradient(
+					180deg,
+					rgb(7, 186, 7) 90%,
+					rgb(7, 146, 7) 10%
+				);
+			}
+
+			.line__btn__text {
+				color: white;
+				font-size: 60px;
+				font-weight: 900;
+			}
+
+			.blackBox {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				height: 150px;
+				background-color: rgb(35, 35, 35);
+				font-size: 50px;
+				font-weight: 600;
+				letter-spacing: 0.16em;
+			}
+
+			.logo {
+				width: 100px;
+			}
+
+			.circle {
+				display: flex;
+				align-items: center;
+				align-content: center;
+				flex-wrap: wrap;
+				background: #ec4646;
+				border-radius: 50%;
+				width: 40px;
+				height: 400px;
+				color: #fff;
+				font-size: 20px;
+				text-align: center;
+			}
+			.circle > .circle-txt1 {
+				display: block;
+				width: 100%;
+				font-size: 40px;
+				font-weight: 400;
+				line-height: 1.2;
+			}
+			.circle > .circle-txt2 {
+				display: block;
+				width: 100%;
+				font-size: 45px;
+				color: yellow;
+				font-weight: 600;
+				margin-top: 20px;
+				line-height: 1.2;
+			}
+
+			.circles {
+				margin: 30px auto -40px;
+			}
+
+			.circle2 {
+				display: flex;
+				justify-content: center;
+			}
+
+			.img3 {
+				position: absolute;
+				top: 130px;
+				left: 20px;
+				width: 300px;
+				height: 300px;
+				border-radius: 50%;
+				object-fit: cover;
+				z-index: 10;
+			}
+
+			.img4 {
+				position: absolute;
+				top: 140px;
+				right: 20px;
+				width: 300px;
+				height: 300px;
+				border-radius: 50%;
+				object-fit: cover;
+				z-index: 10;
+			}
+
+			.txt10 {
+				font-size: 90px;
+				font-weight: 600;
+				display: inline-block;
+				background: linear-gradient(
+					90deg,
+					#a33131 0%,
+					#e76d6d 33%,
+					#ffc5c5 62%,
+					#e35d5d 83%,
+					#9d4e4e 100%
+				);
+				background: -webkit-linear-gradient(
+					0deg,
+					#a33131 0%,
+					#e76d6d 33%,
+					#ffc5c5 62%,
+					#e35d5d 83%,
+					#9d4e4e 100%
+				);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+
+			.board {
+				width: 90%;
+				margin: 50px 0 0;
+			}
+
+			.circle1 {
+				position: relative;
+				top: 0;
+				left: 150px;
+				display: inline-block;
+				background: #ec4646;
+				border-radius: 50%;
+				width: 200px;
+				height: 200px;
+				color: #fff;
+				font-size: 20px;
+				line-height: 60px;
+			}
+
+			.circle1 > .circle1-txt {
+				position: absolute;
+				display: inline-block;
+				left: 0;
+				top: 50%;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+				width: 100%;
+				text-align: center;
+				font-size: 50px;
+				font-weight: 600;
+				line-height: 70px;
+			}
+
+			.balloon1 {
+				position: relative;
+				top: 0;
+				left: 20px;
+				display: inline-block;
+				margin: 1.5em 0;
+				padding: 20px 10px;
+				width: 80%;
+				color: white;
+				font-size: 32px;
+				font-weight: 600;
+				background: linear-gradient(#4c3b92, #ed3b4b);
+				border-radius: 50px;
+			}
+
+			.txt20 {
+				font-size: 40px;
+				margin-top: 20px;
+				color: white;
+				font-weight: 600;
+			}
+
+			/* -------- スマホ -------- */
+			@media screen and (max-width: 600px) {
+				.fv_text {
+					margin: 100px 0 50px;
+				}
+
+				.header {
+					height: 50px;
+				}
+
+				.header__text {
+					font-size: 16px;
+					font-weight: 600;
+				}
+
+				.lineBlock {
+					position: relative;
+					width: 100%;
+					height: 400px;
+					margin-bottom: 10px;
+				}
+
+				.title1 {
+					position: absolute;
+					width: 300px;
+					top: 70px;
+					left: -40px;
+				}
+				.title2 {
+					position: absolute;
+					width: 95%;
+					top: 160px;
+					right: 10px;
+				}
+				.title3 {
+					position: absolute;
+					width: 100%;
+					top: -50px;
+				}
+				.title4 {
+					position: absolute;
+					width: 100%;
+					top: 360px;
+				}
+
+				.lineBlock::after {
+					content: "";
+					position: absolute;
+					background-image: url(./image/photo2.jpg);
+					background-size: cover;
+					width: 220px;
+					height: 220px;
+					top: 90px;
+					right: 10px;
+					border-radius: 50%;
+					background-repeat: no-repeat;
+					z-index: -1;
+				}
+
+				.balloon {
+					position: relative;
+					display: block;
+					margin: 24px auto;
+					width: 90%;
+					padding: 15px 10px;
+					color: white;
+					font-size: 24px;
+					font-weight: 600;
+					letter-spacing: 0.16em;
+					background: red;
+					border-radius: 60px;
+				}
+
+				.balloon:before {
+					content: "";
+					position: absolute;
+					top: 100%;
+					left: 50%;
+					margin-left: -15px;
+					border: 15px solid transparent;
+					border-top: 15px solid red;
+				}
+
+				.line__btn {
+					display: block;
+					margin: 0 auto;
+					width: 90%;
+					line-height: 100px;
+					height: 100px;
+					background: linear-gradient(
+						180deg,
+						rgb(7, 186, 7) 90%,
+						rgb(7, 146, 7) 10%
+					);
+				}
+
+				.line__btn__text {
+					font-size: 24px;
+					font-weight: 900;
+				}
+
+				.blackBox {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					margin-top: 50px;
+					width: 100%;
+					height: auto;
+					background-color: rgb(35, 35, 35);
+					font-size: 24px;
+					font-weight: 600;
+					letter-spacing: 0.16em;
+				}
+
+				.logo {
+					width: 80px;
+				}
+
+				.circle {
+					display: flex;
+					align-items: center;
+					align-content: center;
+					flex-wrap: wrap;
+					background: #ec4646;
+					border-radius: 50%;
+					width: 170px;
+					height: 170px;
+					color: #fff;
+					font-size: 20px;
+					text-align: center;
+				}
+				.circle > .circle-txt1 {
+					display: block;
+					width: 100%;
+					font-size: 16px;
+					font-weight: 400;
+					line-height: 1.2;
+				}
+				.circle > .circle-txt2 {
+					display: block;
+					width: 100%;
+					font-size: 16px;
+					color: yellow;
+					font-weight: 600;
+					margin-top: 20px;
+					line-height: 1.2;
+				}
+
+				.circles {
+					margin: 30px auto -20px;
+				}
+
+				.circle2 {
+					display: flex;
+					justify-content: center;
+				}
+
+				.img3 {
+					position: absolute;
+					top: 70px;
+					left: 10px;
+					width: 110px;
+					height: 110px;
+					border-radius: 50%;
+					object-fit: cover;
+					z-index: 10;
+				}
+
+				.img4 {
+					position: absolute;
+					top: 75px;
+					right: 15px;
+					width: 110px;
+					height: 110px;
+					border-radius: 50%;
+					object-fit: cover;
+					z-index: 10;
+				}
+
+				.txt10 {
+					margin: 40px 0 40px;
+					font-size: 48px;
+					font-weight: 900;
+					font-family: "Mochiy Pop P One", sans-serif;
+					display: inline-block;
+					background: linear-gradient(
+						90deg,
+						#ffee00 0%,
+						#e8cf44 33%,
+						#e8dc5b 62%,
+						#e8cf44 83%,
+						#ffee00 100%
+					);
+					background: -webkit-linear-gradient(
+						0deg,
+						#ffee00 0%,
+						#e8cf44 33%,
+						#e8dc5b 62%,
+						#e8cf44 83%,
+						#ffee00 100%
+					);
+					-webkit-background-clip: text;
+					-webkit-text-fill-color: transparent;
+					-webkit-text-stroke: 3px rgb(252 40 255);
+					line-height: 1.3;
+				}
+
+				.circle1 {
+					position: relative;
+					top: 0;
+					left: 15px;
+					display: inline-block;
+					background: #ec4646;
+					border-radius: 50%;
+					width: 90px;
+					height: 90px;
+					color: #fff;
+					line-height: 60px;
+				}
+
+				.circle1 > .circle1-txt {
+					position: absolute;
+					display: inline-block;
+					left: 0;
+					top: 50%;
+					-webkit-transform: translateY(-50%);
+					transform: translateY(-50%);
+					width: 100%;
+					text-align: center;
+					font-size: 20px;
+					font-weight: 600;
+					line-height: 30px;
+				}
+
+				.balloon1 {
+					position: relative;
+					top: 0;
+					left: 20px;
+					display: inline-block;
+					margin: 1em 0;
+					padding: 20px 10px;
+					width: 250px;
+					color: white;
+					font-size: 16px;
+					font-weight: 600;
+					background: linear-gradient(#4c3b92, #ed3b4b);
+					border-radius: 50px;
+				}
+
+				.txt20 {
+					font-size: 22px;
+					margin-top: 20px;
+					color: white;
+					font-weight: 600;
+				}
+			}
+
+			.image3 {
+				position: relative;
+			}
+
+			.image3::after {
+				content: "";
+				position: absolute;
+				background-image: url(./image/photo3.jpg);
+				background-size: cover;
+				width: 110px;
+				height: 110px;
+				top: -83px;
+				left: -7px;
+				border-radius: 50%;
+				background-repeat: no-repeat;
+			}
+
+			.image4 {
+				position: relative;
+			}
+
+			.image4::after {
+				content: "";
+				position: absolute;
+				background-image: url(./image/photo4.jpg);
+				background-size: cover;
+				width: 110px;
+				height: 110px;
+				top: -74px;
+				right: 0;
+				border-radius: 50%;
+				background-repeat: no-repeat;
+			}
+
+			.mt-100 {
+				margin-top: 180px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="header">
+				<p class="header__text">
+					LINEで出会う<span style="color: yellow">！</span>簡単セフレ探し❤<span
+						style="color: yellow"
+						>Sweet Memory</span
+					>
+				</p>
+			</div>
+			<div id="video-area">
+				<video
+					id="video"
+					poster="./image/photo1.webp"
+					webkit-playsinline
+					playsinline
+					muted
+					autoplay
+					loop
+				>
+					<source src="main.mp4" type="video/mp4" />
+				</video>
+			</div>
+			<div class="fv">
+				<div class="fv_text" data-aos="zoom-in" data-aos-duration="1000">
+					<div class="lineBlock">
+						<img class="title1" src="./image/title1.png" alt="" />
+						<img class="title2" src="./image/title2.png" alt="" />
+						<img class="title3" src="./image/title3.png" alt="" />
+						<img class="title4" src="./image/title4.png" alt="" />
+					</div>
+				</div>
+				<div class="btn01 mt-100">
+					<div class="balloon">
+						<p class="fukidashi">LINEで友達追加</p>
+					</div>
+					<div class="btn yureru-j line__btn">
+						<a class="line__btn__text" href="#">今すぐSEXしたいならコチラ</a>
+					</div>
+				</div>
+			</div>
+			<div class="contents">
+				<div class="blackBox" data-aos="fade-up" data-aos-duration="1000">
+					<img class="logo" src="./image/logo.png" alt="" />
+					<p style="margin-left: 10px">Sweet Memoryが人気のワケ</p>
+				</div>
+				<div
+					style="position: relative"
+					data-aos="fade-up"
+					data-aos-duration="1000"
+				>
+					<div class="circle circles">
+						<span class="circle-txt1">女性の<br />登録数過多で</span>
+						<span class="circle-txt2">性欲旺盛な女性を<br />見付け易い！</span>
+					</div>
+					<div class="circle2">
+						<div class="circle image3">
+							<span class="circle-txt1"
+								>会員全員が同じ<br />目的なので話が早い</span
+							>
+							<span class="circle-txt2">即会いと即ズボは<br />SET！</span>
+						</div>
+						<div class="circle image4" style="margin-left: 5px">
+							<span class="circle-txt1">完全匿名<br />なので</span>
+							<span class="circle-txt2"
+								>今後も女性会員が<br />増え続ける！</span
+							>
+						</div>
+					</div>
+				</div>
+				<p data-aos="fade-up" data-aos-duration="1000" class="txt10">
+					本心はスケベな<br />女性と<br />ヤリまくれる!!
+				</p>
+				<div class="btn02">
+					<div class="balloon">
+						<p class="fukidashi">今すぐヤリまくる</p>
+					</div>
+					<p class="btn yureru-j line__btn">
+						<a class="line__btn__text" href="/">LINE友だち追加❤</a>
+					</p>
+				</div>
+				<div class="photo">
+					<div class="photo__block">
+						<div class="photo__slide">
+							<ul class="loop1">
+								<li>
+									<img src="./image/photo5.jpg" alt="" />
+									<p class="text">細身の子</p>
+								</li>
+								<li>
+									<img src="./image/photo6.jpg" alt="" />
+									<p class="text">熟女</p>
+								</li>
+								<li>
+									<img src="./image/photo7.jpg" alt="" />
+									<p class="text">おっばい星人</p>
+								</li>
+								<li>
+									<img src="./image/photo8.jpg" alt="" />
+									<p class="text">人妻</p>
+								</li>
+								<li>
+									<img src="./image/photo9.jpg" alt="" />
+									<p class="text">ＮＮ希望</p>
+								</li>
+							</ul>
+							<ul class="loop2">
+								<li>
+									<img src="./image/photo5.jpg" alt="" />
+									<p class="text">細身の子</p>
+								</li>
+								<li>
+									<img src="./image/photo6.jpg" alt="" />
+									<p class="text">熟女</p>
+								</li>
+								<li>
+									<img src="./image/photo7.jpg" alt="" />
+									<p class="text">おっばい星人</p>
+								</li>
+								<li>
+									<img src="./image/photo8.jpg" alt="" />
+									<p class="text">人妻</p>
+								</li>
+								<li>
+									<img src="./image/photo9.jpg" alt="" />
+									<p class="text">ＮＮ希望</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="osusume">
+					<div class="blackBox">
+						<img class="logo" src="./image/logo.png" alt="" />
+						<p style="margin-left: 10px">
+							Sweet Memoryは<br />こんな男性を<br />急募しています！
+						</p>
+					</div>
+					<p data-aos="flip-left">
+						<img class="board" src="./image/sweetmemory.png" alt="" />
+					</p>
+				</div>
+				<div class="step">
+					<div class="blackBox">
+						<img class="logo" src="./image/logo.png" alt="" />
+						<p style="margin-left: 10px">Sweet Memoryの<br />始め方</p>
+					</div>
+					<div data-aos="fade-up" data-aos-duration="1000">
+						<div style="display: flex; margin-top: 40px; align-items: center">
+							<div class="circle1">
+								<span class="circle1-txt"
+									>STEP<br /><span style="font-size: 40px">1</span></span
+								>
+							</div>
+							<div class="balloon1">
+								<p>LINEで友だち追加</p>
+							</div>
+						</div>
+						<p class="txt20">
+							普段使用しているLINEアカウントで<br />友達追加して下さい。<br />
+							（個人情報が漏れることは<br />ありませんのでご安心下さい。）
+						</p>
+					</div>
+					<div data-aos="fade-up" data-aos-duration="1000">
+						<div style="display: flex; margin-top: 40px; align-items: center">
+							<div class="circle1">
+								<span class="circle1-txt"
+									>STEP<br /><span style="font-size: 40px">2</span></span
+								>
+							</div>
+							<div class="balloon1">
+								<p>ヤリたいと思う女性を選ぶ</p>
+							</div>
+						</div>
+						<p class="txt20">選んだ女性とLINEして下さい。</p>
+					</div>
+					<div data-aos="fade-up" data-aos-duration="1000">
+						<div style="display: flex; margin-top: 40px; align-items: center">
+							<div class="circle1">
+								<span class="circle1-txt"
+									>STEP<br /><span style="font-size: 40px">3</span></span
+								>
+							</div>
+							<div class="balloon1">
+								<p>あとはヤルだけ❤</p>
+							</div>
+						</div>
+						<p class="txt20">
+							Sweet Memoryでは「即ズボ」<br />が常識です。<br />やり過ぎ注意です！！
+						</p>
+					</div>
+				</div>
+				<div class="btn02">
+					<div class="balloon">
+						<p class="fukidashi">今すぐ友達追加</p>
+					</div>
+					<p class="btn yureru-j line__btn">
+						<a class="line__btn__text" href="/">今日中にSEXする</a>
+					</p>
+				</div>
+				<div class="footer">
+					<small>
+						インターネット異性紹介事業　届出済み（受理番号 48220002000）<br />
+						Copyright&copy;　株式会社D’2plus&C　All Rights Reserved.
+					</small>
+				</div>
+			</div>
+		</div>
+		<script>
+			AOS.init();
+			jQuery(function () {
+				// link
+				$('a[href^="#"]').click(function () {
+					var speed = 500;
+					var href = $(this).attr("href");
+					var target = $(href == "#" || href == "" ? "html" : href);
+					var position = target.offset().top;
+					$("html, body").animate(
+						{
+							scrollTop: position,
+						},
+						speed,
+						"swing"
+					);
+					return false;
+				});
+			});
+			var vh = window.innerHeight;
+			document.getElementById("cta").style.height = vh + "px";
+			objectFitImages();
+		</script>
+	</body>
+</html>
